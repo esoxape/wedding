@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Henrik och Matildas Bröllop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <h1 class="main-headline">Äntligen gifter vi oss!</h1>
+    <img src="henrikomatilda.jpg" alt="Henrik and Matilda" style="width: 100%; max-width: 600px; display: block; margin: 0 auto;"> 
+    <div class="container">
+        <div class="info-box">
+            <h2>Den 29:e juni (återkommer med klockslag) sker vigseln i Rönö kyrka på den östgötska landsbygden, se karta och mer information nedan.</h2>
+            <h2>Vi skulle bli glada om ni ville komma och fira med oss!</h2>
+            <h2>OSA senast 29:e Maj med knappen nedan. Välkommen!</h2>
+            <button onclick="sendRSVPEmail()">OSA</button>
+        </div>
+        <div class="info-box map-box" id="map"></div>
+        <div class="info-box">
+            <h2>Transport</h2>
+            <p>Gratis buss avgår från The Lamp Hotel i Norrköping utanför entren, (klockslag kommer). Det tar ca 45 minuter att åka till kyrkan. Buss tillbaka till The Lamp Hotel går 01:15 från festlokalen som ligger brevid kyrkan och är då alltså framme ca 02:00 i Norrköping vid The Lamp Hotel. Önskar man åka andra tider eller ha mer flexibilitet går det självklart bra att ta egen bil.</p>
+        </div>        
+        <div class="info-box">
+            <h2>Festen och Middagen</h2>
+            <p>Festen hålls i Rönö byggdegård. Byggnaden ligger ca 50 meter från Kyrkan. Här blir det grill, fri bar och dans till 01:00. Eventuella tal anmäls till toastmaster.</p>
+        </div>   
+        <div class="info-box">
+            <h2>Klädkod</h2>
+            <p>Sommarfint efter eget </p>
+        </div>   
+        <div class="info-box">
+            <h2>Barnfritt</h2>
+            <p>Vi är båda barnkära men just denna dag önskar vi barnfri vigsel och fest. Ammande barn och syskonbarn är undantagna</p>
+        </div>   
+        <div class="info-box">
+            <h2>Boende</h2>
+            <p>Det finns många hotell i Norrköping för inresande men brudparet kommer bo på The Lamp Hotel och vi har också då fått en rabattkod om ni också vill bo där (10%). Kampanjkod love anges vid bokning och kan ej anges i efterhand</p>
+        </div>   
+        <div class="info-box">
+            <h2>Kontaktuppgifter</h2>
+            <p>Undrar ni något? Hör av dig till oss eller vår toastmaster:</p>
+            <p>Henrik Johansson henrik@soltek.se 0708570005</p>
+            <p>Matilda Törnered matilda.tornered@gmail.com 07080206989</p>
+            <p>Toastmaster:</p>
+            <p>Sara Wester </p>
+        </div>   
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

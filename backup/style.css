@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #000033; /* Very dark marine blue background */
+    color: #FFFFFF; /* White text for better readability */
+    margin: 0;
+    padding: 0;
+}
+
+.main-headline {
+    color: #FFFFFF;
+    padding: 20px 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column; /* Changed to stack boxes vertically */
+    align-items: center; /* Center the boxes vertically */
+    padding: 20px;
+}
+
+.info-box {
+    width: 80%; /* Adjusted width for better visual on vertical layout */
+    margin: 10px 0; /* Adjusted margin for vertical stacking */
+    padding: 20px;
+    background-color: #FFFFFF;
+    color: #000;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Optional: Adds subtle shadow for depth */
+}
+.map-box {
+    height: 400px; /* Ensuring map height, adjust as needed */
+    width: 80%; /* Consistent width with other boxes */
+    margin: 10px 0; /* Consistent margin for vertical layout */
+    background-color: #f0f0f0; /* Lighter background for the map */
+}
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Henrik och Matildas Bröllop</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <h1 class="main-headline">Äntligen gifter vi oss! </h1>
+    <div class="container">
+        <div class="info-box">
+            <h2>Den 29:e juni kl 16:00 sker vigseln i Rönö kyrka, se karta och mer info nedan</h2>
+            <h2>OSA senast 29:e Maj med knappen nedan. Välkommen!</h2>
+        </div>
+        <div class="info-box map-box" id="map" style="height: 400px;"></div>
+        <div class="info-box">
+            <h2>Transport</h2>
+            <p>Gratis buss avgår från the lamp hotel i Norrköping utanför entren, vid 15:00. Det tar ca 45 minuter att åka till kyrkan. Buss tillbaka till the lamp hotel går 01:00 från festlokalen som ligger brevid kyrkan och är du alltså framme ca 01:45 i Norrköping. Önskar man åka andra tider eller ha mer flexibilitet går det självklart bra att ta egen bil.</p>
+        </div>        
+    </div>
+    <button onclick="sendRSVPEmail()">RSVP</button>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
