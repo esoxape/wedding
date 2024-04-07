@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Wishlist</title>
+<title>Önskelista</title>
 <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
 <script>
@@ -34,51 +34,91 @@ measurementId: "G-GL9ECN0GC6"
 </head>
 <body>
 
-<h2>Wishlist</h2>
+<h2>Önskelista</h2>
 
+<p>Välkommen till vår önskelista! Här har vi samlat de gåvor vi drömmer om att få till vårt bröllop. För att göra processen smidig och undvika dubletter, erbjudre vi möjligheten att "reservera" en gåva. Detta innebär att när du väljer en gåva du vill ge, kan du markera den som "Reserverad" för att låta andra gäster veta att den redan är vald. Viktig information: Denna sida är inte synlig för brudparet för att säkerställa en överraskning. </p>
+
+<br>
+
+<p>Hur man reserverar en gåva:</p>
+<p>1. Välj gåva: Bläddra igenom listan och välj den gåva du önskar ge.</p>
+<p>2. Reservera: Klicka på den tomma rutan bredvid gåvan. Ditt namn kommer inte att visas för andra gäster, bara att någon redan planerar att ge denna gåva.</p>
+<br>
+<p>Lägga Till en Ny Gåva:</p>
+<p>Har du en egen gåvoidé som inte finns på listan? Du kan enkelt lägga till den genom att:</p>
+<p>Skriv ny text nedanför listan vid "Lägg till gåva" och klicka på knappen Lägg till.</p>
+<br>
+<p>Radera En Gåva:</p>
+<p>Om du av misstag lägger till en gåva eller ändrar dig: Klicka på "Ta Bort"-knappen bredvid den gåva du vill radera. Den är tillgänglig en timma efter att man lagt till raden.</p>
 <table id="wishlist">
   <tr>
-    <th>Item</th>
-    <th>Status</th>
+    <th>Gåvans namn</th>
+    <th>Reserverad</th>
+    <th>Ta bort</th>
   </tr>
 </table>
 
 <br>
 
-<label for="newItem">Add a new item:</label>
+<label for="newItem">Lägg till gåva:</label>
 <input type="text" id="newItem" name="newItem">
-<button onclick="addItem()">Add Item</button>
-
+<button onclick="addItem()">Lägg till</button>
 <script>
-function addItem() {
-  const itemName = document.getElementById('newItem').value;
-  if (!itemName.trim()) return;
-  const newItemRef = db.ref('wishlist').push();
-  newItemRef.set({ name: itemName, bought: false });
-  document.getElementById('newItem').value = ''; // Clear the input
-}
-
-db.ref('wishlist').on('value', (snapshot) => {
-  const wishlist = snapshot.val();
-  const wishlistTable = document.getElementById('wishlist');
-  while (wishlistTable.rows.length > 1) {
-    wishlistTable.deleteRow(1);
-  }
-  Object.keys(wishlist).forEach((key) => {
-    const item = wishlist[key];
-    const row = wishlistTable.insertRow(-1);
-    const cell1 = row.insertCell(0);
-    const cell2 = row.insertCell(1);
-    cell1.textContent = item.name;
-    cell2.innerHTML = `<input type="checkbox" ${item.bought ? 'checked' : ''} onchange="updateStatus('${key}', this.checked)">`;
-    row.className = item.bought ? 'bought' : 'available';
-  });
-});
-
-function updateStatus(itemId, bought) {
-  db.ref('wishlist/' + itemId).update({ bought });
-}
+    function addItem() {
+      const itemName = document.getElementById('newItem').value.trim();
+      if (!itemName) return;
+    
+      const newItemRef = db.ref('wishlist').push();
+      const timestamp = Date.now(); // Get the current timestamp
+      newItemRef.set({ name: itemName, bought: false, timestamp })
+        .then(() => {
+          document.getElementById('newItem').value = ''; // Clear the input
+        })
+        .catch(error => console.error("Error adding item:", error));
+    }
+    
+    db.ref('wishlist').on('value', (snapshot) => {
+      const wishlist = snapshot.val();
+      const wishlistTable = document.getElementById('wishlist');
+      
+      while (wishlistTable.rows.length > 1) {
+        wishlistTable.deleteRow(1);
+      }
+    
+      Object.keys(wishlist).forEach((key) => {
+        const item = wishlist[key];
+        const row = wishlistTable.insertRow(-1);
+        const cell1 = row.insertCell(0);
+        const cell2 = row.insertCell(1);
+        const cell3 = row.insertCell(2);
+    
+        cell1.textContent = item.name;
+        cell2.innerHTML = `<input type="checkbox" ${item.bought ? 'checked' : ''} onchange="updateStatus('${key}', this.checked)">`;
+        
+        const currentTime = Date.now();
+        const itemAge = currentTime - item.timestamp;
+        const oneHour = 60 * 60 * 1000; // Milliseconds in one hour
+        if (itemAge < oneHour) {
+          // Show delete button for items less than one hour old
+          cell3.innerHTML = `<button onclick="deleteItem('${key}')">Ta bort</button>`;
+        }
+    
+        row.className = item.bought ? 'bought' : 'available';
+      });
+    });
+    
+    function updateStatus(itemId, bought) {
+      db.ref('wishlist/' + itemId).update({ bought })
+        .catch(error => console.error("Error updating status:", error));
+    }
+    
+    function deleteItem(itemId) {
+      db.ref('wishlist/' + itemId).remove()
+        .catch(error => console.error("Error deleting item:", error));
+    }
 </script>
+    
+    
 
 </body>
 </html>

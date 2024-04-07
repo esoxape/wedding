@@ -54,7 +54,5 @@ function animateBeerMug(marker) {
 
     }, 70); 
 }
-function sendRSVPEmail() {
-    window.location.href = "mailto:your-email@example.com?subject=Wedding RSVP&body=Hi,%0D%0A%0D%0AI would like to RSVP for the wedding event.";
-}
+
 
