@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Henrik och Matildas Bröllop</title>
     <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -13,15 +13,17 @@
     <img src="henrikomatilda.jpg" alt="Henrik and Matilda" style="width: 100%; max-width: 600px; display: block; margin: 0 auto;"> 
     <div class="container">
         <div class="info-box">
-            <h2>Den 29:e juni (återkommer med klockslag) sker vigseln i Rönö kyrka på den östgötska landsbygden, se karta och mer information nedan.</h2>
+            <h2>Lördag den 29 juni (återkommer med klockslag) sker vigseln i Rönö kyrka på den östgötska landsbygden, se karta och mer information nedan.</h2>
             <h2>Vi skulle bli glada om ni ville komma och fira med oss!</h2>
-            <h2>OSA senast 29:e Maj med knappen nedan. Välkommen!</h2>
-            <button onclick="sendRSVPEmail()">OSA</button>
+            <h2>OSA senast 29 maj med knappen nedan. Välkommen!</h2>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSe_ag8zELx9JMGqwNNqF219dyO5HFBR2SYkwOIlI-sTXyvORA/viewform?embedded=true" target="_blank">
+                <button id="directFormButton">OSA här</button>
+            </a>
         </div>
         <div class="info-box map-box" id="map"></div>
         <div class="info-box">
             <h2>Transport</h2>
-            <p>Gratis buss avgår från The Lamp Hotel i Norrköping utanför entren, (klockslag kommer). Det tar ca 45 minuter att åka till kyrkan. Buss tillbaka till The Lamp Hotel går 01:15 från festlokalen som ligger brevid kyrkan och är då alltså framme ca 02:00 i Norrköping vid The Lamp Hotel. Önskar man åka andra tider eller ha mer flexibilitet går det självklart bra att ta egen bil.</p>
+            <p>Gratis buss avgår från The Lamp Hotel i Norrköping utanför entren, (klockslag kommer). Det tar ca 45 minuter att åka till kyrkan från Norrköping. Buss tillbaka till The Lamp Hotel går kl 01:15 från festlokalen som ligger brevid kyrkan och är då alltså framme ca kl 02:00 i Norrköping vid The Lamp Hotel. Önskar man åka andra tider eller ha mer flexibilitet går det självklart bra att ta egen bil.</p>
         </div>        
         <div class="info-box">
             <h2>Festen och Middagen</h2>
@@ -29,7 +31,7 @@
         </div>   
         <div class="info-box">
             <h2>Klädkod</h2>
-            <p>Sommarfint efter eget </p>
+            <p>Sommarfint på ditt sätt - elegant men avslappnat</p>
         </div>   
         <div class="info-box">
             <h2>Barnfritt</h2>
@@ -40,15 +42,21 @@
             <p>Det finns många hotell i Norrköping för inresande men brudparet kommer bo på The Lamp Hotel och vi har också då fått en rabattkod om ni också vill bo där (10%). Kampanjkod love anges vid bokning och kan ej anges i efterhand</p>
         </div>   
         <div class="info-box">
+            <h2>Gåvor</h2>
+            <p>Eftersom vi vet att många kommer att fråga så har vi förberett en interaktiv önskelista, se länk nedan, men det är självklart inget krav att ge något. Vi är glada bara att du är där! </p>
+            <a href="index_wishlist.html" target="_blank">
+                <button id="wishlistButton">Gåvor</button>
+            </a>
+        </div>
+        <div class="info-box">
             <h2>Kontaktuppgifter</h2>
             <p>Undrar ni något? Hör av dig till oss eller vår toastmaster:</p>
-            <p>Henrik Johansson henrik@soltek.se 0708570005</p>
-            <p>Matilda Törnered matilda.tornered@gmail.com 07080206989</p>
+            <p>Henrik Johansson henrik@soltek.se tfn: 0708570005</p>
+            <p>Matilda Törnered matilda.tornered@gmail.com tfn: 0760206989</p>
             <p>Toastmaster:</p>
-            <p>Sara Wester sara.km.wester@gmail.com</p>
-        </div>   
+            <p>Sara Wester sara.km.wester@gmail.com tfn: 0768562476</p>
+        </div>
     </div>
-
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="script.js"></script>
 </body>

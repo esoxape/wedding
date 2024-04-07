@@ -63,3 +63,21 @@ button:hover {
 .leaflet-bottom.leaflet-right {
     display: none !important;
 }
+/* CSS for maintaining image aspect ratio */
+.image-container {
+    width: 100%; /* Full width of its parent */
+    max-width: 3996px; /* Maximum width of the image */
+    margin: 0 auto; /* Center the container */
+    overflow: hidden; /* Ensure no overflow */
+    position: relative; /* For absolute positioning of the image */
+}
+
+.responsive-image {
+    width: 100%; /* Make image fill the container */
+    height: auto; /* Maintain aspect ratio */
+    position: absolute; /* Absolute position within the container */
+    top: 0; /* Align top */
+    left: 0; /* Align left */
+}
+
+/* Adjust your existing CSS accordingly to avoid conflicts */

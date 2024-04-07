@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Wishlist</title>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+<script>
+  const firebaseConfig = {
+
+apiKey: "AIzaSyDNQoXp4hEUa6RptQpHenNr5OKcHkOnqnk",
+
+authDomain: "wishlist-b2adf.firebaseapp.com",
+databaseURL: "https://wishlist-b2adf-default-rtdb.europe-west1.firebasedatabase.app",
+projectId: "wishlist-b2adf",
+
+storageBucket: "wishlist-b2adf.appspot.com",
+
+messagingSenderId: "629221881799",
+
+appId: "1:629221881799:web:2db086980c3c759d0d4be2",
+
+measurementId: "G-GL9ECN0GC6"
+
+};
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+</script>
+<style>
+  .bought { background-color: red; }
+  .available { background-color: green; }
+</style>
+</head>
+<body>
+
+<h2>Wishlist</h2>
+
+<table id="wishlist">
+  <tr>
+    <th>Item</th>
+    <th>Status</th>
+  </tr>
+</table>
+
+<br>
+
+<label for="newItem">Add a new item:</label>
+<input type="text" id="newItem" name="newItem">
+<button onclick="addItem()">Add Item</button>
+
+<script>
+function addItem() {
+  const itemName = document.getElementById('newItem').value;
+  if (!itemName.trim()) return;
+  const newItemRef = db.ref('wishlist').push();
+  newItemRef.set({ name: itemName, bought: false });
+  document.getElementById('newItem').value = ''; // Clear the input
+}
+
+db.ref('wishlist').on('value', (snapshot) => {
+  const wishlist = snapshot.val();
+  const wishlistTable = document.getElementById('wishlist');
+  while (wishlistTable.rows.length > 1) {
+    wishlistTable.deleteRow(1);
+  }
+  Object.keys(wishlist).forEach((key) => {
+    const item = wishlist[key];
+    const row = wishlistTable.insertRow(-1);
+    const cell1 = row.insertCell(0);
+    const cell2 = row.insertCell(1);
+    cell1.textContent = item.name;
+    cell2.innerHTML = `<input type="checkbox" ${item.bought ? 'checked' : ''} onchange="updateStatus('${key}', this.checked)">`;
+    row.className = item.bought ? 'bought' : 'available';
+  });
+});
+
+function updateStatus(itemId, bought) {
+  db.ref('wishlist/' + itemId).update({ bought });
+}
+</script>
+
+</body>
+</html>
+
