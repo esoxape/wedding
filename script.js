@@ -5,26 +5,29 @@ document.addEventListener('DOMContentLoaded', function() {
         attribution: ''
     }).addTo(map);
 
-    var beerMugIcon = L.icon({
-        iconUrl: 'grill.png',
-        iconSize: [30, 30],
-        iconAnchor: [15, 15],
-        popupAnchor: [0, -30]
-    });
 
-    var beerMugMarker = L.marker([58.44845628837045, 16.741100526827133], {icon: beerMugIcon}).addTo(map)
-        .bindPopup('Festlokal');
-
-    animateBeerMug(beerMugMarker);
-
-
+    addAnimatedMarker([58.44845628837045, 16.741100526827133], 'grill.png', 'Festlokal', map);
+    addAnimatedMarker([58.59092948182992, 16.187712891406548], 'bus.png', 'The Lamp Hotel <br> Hospitalsgatan 5, 602 27 Norrköping', map);
     var otherMarker = L.marker([58.44895928837045, 16.741560526827133]).addTo(map)
         .bindPopup('Rönö Kyrka <br> 610 27 Vikbolandet');
-
     otherMarker.openPopup();
 });
 
-function animateBeerMug(marker) {
+function addAnimatedMarker(position, iconFile, popupText, map) {
+    var icon = L.icon({
+        iconUrl: iconFile,
+        iconSize: [30, 30],
+        iconAnchor: [15, 15], 
+        popupAnchor: [0, -30] 
+    });
+
+    var marker = L.marker(position, {icon: icon}).addTo(map)
+        .bindPopup(popupText);
+
+    animateMarker(marker, iconFile); 
+}
+
+function animateMarker(marker, iconFile) {
     var maxSize = 70;
     var minSize = 50;
     var size = minSize;
@@ -45,14 +48,11 @@ function animateBeerMug(marker) {
         }
 
         var newIcon = L.icon({
-            iconUrl: currentIcon.options.iconUrl,
-            iconSize: [size, size],
-            iconAnchor: [size / 2, size / 2],
-            popupAnchor: currentIcon.options.popupAnchor
+            iconUrl: iconFile, 
+            iconSize: [size, size], 
+            iconAnchor: [size / 2, size / 2], 
+            popupAnchor: currentIcon.options.popupAnchor 
         });
         marker.setIcon(newIcon);
-
-    }, 70); 
+    }, 70);
 }
-
-
