@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bus Marker with Animated Exhaust Clouds</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map { height: 400px; }
+        .exhaust {
+            position: absolute;
+            background-color: grey;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            opacity: 0.75;
+            pointer-events: none;
+            animation: exhaustFade 1s forwards;
+        }
+        @keyframes exhaustFade {
+            0% { opacity: 0.75; transform: translateX(0); }
+            100% { opacity: 0; transform: translateX(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var map = L.map('map').setView([55, 15], 17);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: ''
+            }).addTo(map);
+
+            // Initialize the bus marker with animated exhaust clouds
+            addMarkerWithExhaust([55, 15], 'bus.png', 'Bus Stop', map);
+        });
+
+        function addMarkerWithExhaust(position, iconFile, popupText, map) {
+            var icon = L.icon({
+                iconUrl: iconFile,
+                iconSize: [30, 30],
+                iconAnchor: [15, 15],
+                popupAnchor: [0, -30]
+            });
+
+            var marker = L.marker(position, {icon: icon}).addTo(map)
+                .bindPopup(popupText);
+
+            // Start exhaust clouds animation
+            addExhaust(marker, map);
+        }
+
+        function addExhaust(marker, map) {
+            var mapContainer = map.getContainer();
+
+            setInterval(function() {
+                var markerPos = map.latLngToLayerPoint(marker.getLatLng());
+                var exhaustElement = document.createElement('div');
+                exhaustElement.className = 'exhaust';
+                exhaustElement.style.left = markerPos.x - 15 + 'px'; // Adjust starting position based on bus icon
+                exhaustElement.style.top = markerPos.y + 'px';
+
+                mapContainer.appendChild(exhaustElement);
+
+                // Automatically remove the element after animation ends
+                setTimeout(function() {
+                    mapContainer.removeChild(exhaustElement);
+                }, 1000); // Match the duration of the CSS animation
+            }, 200);
+        }
+    </script>
+</body>
+</html>
